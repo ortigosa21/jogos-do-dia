@@ -6,28 +6,37 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Token e Ligas desejadas
   const apiToken = "JNzNoDErzBVwLPCht6NZssRcroMFqPSYxL1HEejGiM0dJRrB6YHbj4oCOmo8";
-  const leagues = [
-    1958, // Premier League (Inglaterra)
-    1843, // Bundesliga (Alemanha)
-    564,  // LaLiga (Espanha)
-    197,  // Serie A (Itália)
-    271,  // Brasileiro Série A
-    273,  // Brasileiro Série B
-  ];
+
+  // IDs das ligas + bandeira
+  const leaguesInfo = {
+    1958: { name: "Premier League", flag: "https://flagcdn.com/w40/gb.png" },
+    1843: { name: "Bundesliga", flag: "https://flagcdn.com/w40/de.png" },
+    564: { name: "LaLiga", flag: "https://flagcdn.com/w40/es.png" },
+    197: { name: "Serie A (Itália)", flag: "https://flagcdn.com/w40/it.png" },
+    271: { name: "Brasileirão Série A", flag: "https://flagcdn.com/w40/br.png" },
+    273: { name: "Brasileirão Série B", flag: "https://flagcdn.com/w40/br.png" },
+  };
+
+  const leagueIds = Object.keys(leaguesInfo).map(Number);
+  const today = new Date().toISOString().split("T")[0];
+  const formattedDate = new Date().toLocaleDateString("pt-BR", {
+    weekday: "long",
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
 
   useEffect(() => {
     const fetchMatches = async () => {
       try {
-        const today = new Date().toISOString().split("T")[0];
         const url = `https://api.sportmonks.com/v3/football/fixtures/date/${today}?api_token=${apiToken}&include=participants;league;venue;tvstations`;
         const response = await fetch(url);
         const data = await response.json();
 
         if (data?.data) {
-          const filtered = data.data.filter(
-            (match) => leagues.includes(match.league_id)
+          const filtered = data.data.filter((match) =>
+            leagueIds.includes(match.league_id)
           );
           setMatches(filtered);
         } else {
@@ -45,7 +54,10 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <h1 className="title">⚽ Jogos do Dia</h1>
+      <header className="header">
+        <h1 className="title">⚽ Jogos do Dia</h1>
+        <div className="date-banner">📅 {formattedDate}</div>
+      </header>
 
       {loading && <p className="info">Carregando partidas...</p>}
       {error && <p className="error">{error}</p>}
@@ -57,6 +69,7 @@ export default function App() {
         {matches.map((match) => {
           const home = match.participants.find((p) => p.meta.location === "home");
           const away = match.participants.find((p) => p.meta.location === "away");
+          const league = leaguesInfo[match.league_id];
           const tv =
             match.tvstations && match.tvstations.length > 0
               ? match.tvstations.map((t) => t.name).join(", ")
@@ -64,6 +77,19 @@ export default function App() {
 
           return (
             <div className="card" key={match.id}>
+              <div className="league-info">
+                {league && (
+                  <>
+                    <img
+                      src={league.flag}
+                      alt={league.name}
+                      className="flag"
+                    />
+                    <span>{league.name}</span>
+                  </>
+                )}
+              </div>
+
               <div className="teams">
                 <div className="team">
                   {home?.image_path && (
@@ -81,15 +107,14 @@ export default function App() {
               </div>
 
               <div className="details">
-                <p className="league">{match.league?.name}</p>
                 <p className="time">
-                  Horário:{" "}
+                  🕒{" "}
                   {new Date(match.starting_at).toLocaleTimeString("pt-BR", {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
                 </p>
-                <p className="tv">Transmissão: {tv}</p>
+                <p className="tv">📺 {tv}</p>
               </div>
             </div>
           );
