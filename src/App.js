@@ -5,11 +5,11 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 🔑 Token direto (GitHub Pages não suporta .env)
+  // 🔑 Token da API
   const apiToken = "JNzNoDErzBVwLPCht6NZssRcroMFqPSYxL1HEejGiM0dJRrB6YHbj4oCOmo8";
 
   // Ligas: Bundesliga, Premier League, La Liga, Brasileirão A, Brasileirão B, Serie A (Itália)
-  const leagueIds = [8, 1, 564, 271, 302, 384];
+  const leagueIds = [8, 2, 564, 271, 302, 384];
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -19,9 +19,19 @@ export default function App() {
         let allGames = [];
 
         for (const leagueId of leagueIds) {
-          const url = `https://soccer.sportmonks.com/api/v2.0/fixtures/date/${today}?api_token=${apiToken}&include=localTeam,visitorTeam,league,tvstations&leagues=${leagueId}`;
-          const res = await fetch(url);
-          const data = await res.json();
+          const originalUrl = `https://soccer.sportmonks.com/api/v2.0/fixtures/date/${today}?api_token=${apiToken}&include=localTeam,visitorTeam,league,tvstations&leagues=${leagueId}`;
+          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(originalUrl)}`;
+
+          const res = await fetch(proxyUrl);
+          const proxyData = await res.json();
+
+          let data;
+          try {
+            data = JSON.parse(proxyData.contents);
+          } catch (e) {
+            console.warn("Erro ao interpretar resposta da liga", leagueId, e);
+            continue;
+          }
 
           if (data.data && Array.isArray(data.data)) {
             allGames = allGames.concat(data.data);
@@ -108,9 +118,9 @@ const styles = {
     maxWidth: "1000px",
     margin: "20px auto",
     padding: "0 15px",
-    backgroundColor: "#0D47A1", // Azul escuro
+    backgroundColor: "#0D47A1",
     minHeight: "100vh",
-    color: "#FFEB3B", // Amarelo
+    color: "#FFEB3B",
   },
   title: {
     textAlign: "center",
