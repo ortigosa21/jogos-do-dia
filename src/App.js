@@ -5,10 +5,10 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiToken = "c4dbd3ce7bc383b06c1ede5df9671567"; // sua chave da API-Football
+  const apiToken = "c4dbd3ce7bc383b06c1ede5df9671567";
   const today = new Date().toISOString().split("T")[0];
 
-  const leagueIds = [78, 39, 140, 71, 74, 135, 2, 3]; // Bundesliga, Premier League, LaLiga, Brasileirão A/B, Serie A, Champions, Libertadores
+  const leagueIds = [78, 39, 140, 71, 74, 135, 2, 3];
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -27,6 +27,10 @@ export default function App() {
 
           if (!res.ok) throw new Error(`Erro ${res.status}: ${res.statusText}`);
           const data = await res.json();
+
+          // 👇 Aqui está o log para verificar o retorno da API por liga
+          console.log(`Liga ${leagueId}:`, data);
+
           if (data.response && Array.isArray(data.response)) {
             allGames = allGames.concat(data.response);
           }
