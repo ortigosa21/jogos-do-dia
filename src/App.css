@@ -1,202 +1,64 @@
-/* ======== RESET GERAL ======== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ======== FUNDO E ESTRUTURA ======== */
-body {
-  background-color: #0d1b2a; /* Azul mais escuro */
-  font-family: "Poppins", sans-serif;
-  color: #fdd835; /* Dourado */
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+.App {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
   padding: 20px;
 }
 
-.app-container {
-  width: 100%;
-  max-width: 1100px;
-  background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-}
-
-/* ======== CABEÇALHO ======== */
-.header {
+h1 {
   text-align: center;
-  margin-bottom: 25px;
+  color: #333;
 }
 
-.title {
-  font-size: 2.8rem;
-  color: #ffd700; /* Dourado vivo */
-  font-weight: 700;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-}
-
-.date-banner {
-  background-color: #ffd700;
-  color: #0d1b2a;
-  font-weight: 600;
-  padding: 10px 25px;
-  border-radius: 10px;
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 1rem;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* ======== MENSAGENS ======== */
-.info,
-.error {
-  text-align: center;
-  font-size: 1.2rem;
-  margin: 30px 0;
-}
-
-.error {
-  color: #e53935; /* Vermelho */
-  font-weight: bold;
-}
-
-/* ======== ÁREA DE CARDS ======== */
-.cards-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-/* ======== CARD ======== */
-.card {
-  background: linear-gradient(180deg, #283593 0%, #5c6bc0 100%);
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-  color: #ffffff;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
-
-/* ======== LIGA E BANDEIRA ======== */
-.league-info {
+.games-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #ffd700;
-  font-size: 1.1rem;
-  text-align: center;
-}
-
-.flag {
-  width: 30px;
-  height: 20px;
-  border-radius: 3px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
-}
-
-/* ======== TIMES ======== */
-.teams {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 10px;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.team {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  object-fit: contain;
+.game-card {
   background-color: #fff;
-  padding: 3px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 300px;
+  margin: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.vs {
-  color: #e53935; /* Vermelho */
-  font-weight: 700;
-  font-size: 1.3rem;
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ======== DETALHES ======== */
-.details {
-  text-align: center;
-  font-size: 0.95rem;
+.country-flag {
+  font-size: 1.5em;
+}
+
+.league-name {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.teams {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.match-time {
+  color: #555;
+}
+
+.tv-channels {
   margin-top: 10px;
 }
 
-.time {
+.tv-channel {
+  display: block;
+  background-color: #007bff;
   color: #fff;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.tv {
-  color: #ffcc80; /* Dourado suave */
-  font-style: italic;
-}
-
-/* ======== RESPONSIVIDADE ======== */
-@media (max-width: 768px) {
-  .title {
-    font-size: 2rem;
-  }
-
-  .card {
-    padding: 15px;
-  }
-
-  .teams {
-    font-size: 1.1rem;
-  }
-
-  .logo {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-/* ======== MODO ESCURO SUAVE (noite) ======== */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #0a1026;
-  }
-
-  .app-container {
-    background: linear-gradient(180deg, #1a237e 0%, #283593 100%);
-  }
-
-  .title {
-    color: #ffeb3b;
-  }
-
-  .date-banner {
-    background-color: #ffeb3b;
-    color: #001f3f;
-  }
-
-  .card {
-    background: linear-gradient(180deg, #2c387e 0%, #3949ab 100%);
-  }
+  padding: 5px;
+  margin: 2px 0;
+  border-radius: 4px;
+  text-align: center;
 }
