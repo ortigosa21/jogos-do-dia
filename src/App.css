@@ -1,0 +1,76 @@
+body {
+  background: linear-gradient(135deg, #001f3f, #003366, #b8860b);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  text-align: center;
+  padding: 30px;
+}
+
+.title {
+  color: #ffd700;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.info, .error {
+  font-size: 1.2rem;
+  color: #ffcccb;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ffd700;
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 8px;
+}
+
+.vs {
+  font-size: 1.3rem;
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.details {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
