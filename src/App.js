@@ -5,7 +5,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiToken = "SUA_NOVA_CHAVE_AQUI"; // Substitua pela nova chave
+  const apiToken = "c4dbd3ce7bc383b06c1ede5df9671567";
   const today = new Date().toISOString().split("T")[0];
 
   const leagueIds = [78, 39, 140, 71, 74, 135, 2, 3];
