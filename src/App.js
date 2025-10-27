@@ -5,10 +5,10 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const apiToken = "c4dbd3ce7bc383b06c1ede5df9671567";
+  const apiToken = "c4dbd3ce7bc383b06c1ede5df9671567"; // sua chave da API-Football
   const today = new Date().toISOString().split("T")[0];
 
-  const leagueIds = [78, 39, 140, 71, 74, 135, 2, 3];
+  const leagueIds = [78, 39, 140, 71, 74, 135, 2, 3]; // Bundesliga, Premier League, LaLiga, Brasileirão A/B, Serie A, Champions, Libertadores
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -17,8 +17,7 @@ export default function App() {
 
         for (const leagueId of leagueIds) {
           const res = await fetch(
-           `https://v3.football.api-sports.io/fixtures?league=${leagueId}&date=${today}`
-
+            `https://v3.football.api-sports.io/fixtures?league=${leagueId}&date=${today}`,
             {
               headers: {
                 "x-apisports-key": apiToken
