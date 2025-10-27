@@ -1,76 +1,202 @@
-body {
-  background: linear-gradient(135deg, #001f3f, #003366, #b8860b);
-  color: white;
-  font-family: "Poppins", sans-serif;
+/* ======== RESET GERAL ======== */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+/* ======== FUNDO E ESTRUTURA ======== */
+body {
+  background-color: #0d1b2a; /* Azul mais escuro */
+  font-family: "Poppins", sans-serif;
+  color: #fdd835; /* Dourado */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
 }
 
 .app-container {
+  width: 100%;
+  max-width: 1100px;
+  background: linear-gradient(180deg, #1a237e 0%, #3949ab 100%);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* ======== CABEÇALHO ======== */
+.header {
   text-align: center;
-  padding: 30px;
+  margin-bottom: 25px;
 }
 
 .title {
-  color: #ffd700;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-size: 2.8rem;
+  color: #ffd700; /* Dourado vivo */
+  font-weight: 700;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-.info, .error {
+.date-banner {
+  background-color: #ffd700;
+  color: #0d1b2a;
+  font-weight: 600;
+  padding: 10px 25px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ======== MENSAGENS ======== */
+.info,
+.error {
+  text-align: center;
   font-size: 1.2rem;
-  color: #ffcccb;
+  margin: 30px 0;
 }
 
+.error {
+  color: #e53935; /* Vermelho */
+  font-weight: bold;
+}
+
+/* ======== ÁREA DE CARDS ======== */
 .cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
 }
 
+/* ======== CARD ======== */
 .card {
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid #ffd700;
+  background: linear-gradient(180deg, #283593 0%, #5c6bc0 100%);
   border-radius: 15px;
   padding: 20px;
-  width: 280px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-.teams {
+/* ======== LIGA E BANDEIRA ======== */
+.league-info {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ffd700;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.flag {
+  width: 30px;
+  height: 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+/* ======== TIMES ======== */
+.teams {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
 }
 
 .team {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 40%;
+  gap: 8px;
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  object-fit: contain;
+  background-color: #fff;
+  padding: 3px;
 }
 
 .vs {
+  color: #e53935; /* Vermelho */
+  font-weight: 700;
   font-size: 1.3rem;
-  color: #ff4444;
-  font-weight: bold;
 }
 
+/* ======== DETALHES ======== */
 .details {
-  margin-top: 15px;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+.time {
+  color: #fff;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.tv {
+  color: #ffcc80; /* Dourado suave */
+  font-style: italic;
+}
+
+/* ======== RESPONSIVIDADE ======== */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .teams {
+    font-size: 1.1rem;
+  }
+
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ======== MODO ESCURO SUAVE (noite) ======== */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #0a1026;
+  }
+
+  .app-container {
+    background: linear-gradient(180deg, #1a237e 0%, #283593 100%);
+  }
+
+  .title {
+    color: #ffeb3b;
+  }
+
+  .date-banner {
+    background-color: #ffeb3b;
+    color: #001f3f;
+  }
+
+  .card {
+    background: linear-gradient(180deg, #2c387e 0%, #3949ab 100%);
+  }
 }
