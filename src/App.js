@@ -17,7 +17,7 @@ export default function App() {
 
         for (const leagueId of leagueIds) {
           const res = await fetch(
-            `https://v3.football.api-sports.io/fixtures?league=${leagueId}&season=2025&date=${today}`,
+            `https://v3.football.api-sports.io/fixtures?league=${leagueId}&date=${today}`,
             {
               headers: {
                 "x-apisports-key": apiToken
