@@ -46,12 +46,6 @@ h1 {
   gap: 10px;
 }
 
-.logo {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
-
 .vs {
   color: #E53935;
   font-weight: bold;
@@ -70,20 +64,10 @@ h1 {
   font-weight: bold;
 }
 
-.tvSection {
+.status {
   text-align: center;
-  margin-top: 5px;
-}
-
-.tvList {
-  list-style-type: none;
-  padding: 0;
-  margin: 5px 0;
-}
-
-.noTv {
-  color: #FFCC80;
   font-style: italic;
+  color: #FFCC80;
 }
 
 .centered {
