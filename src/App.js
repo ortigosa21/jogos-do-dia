@@ -22,7 +22,6 @@ export default function App() {
 
         if (!res.ok) throw new Error(`Erro ${res.status}: ${res.statusText}`);
         const data = await res.json();
-        console.log("Dados recebidos:", data);
         setGames(data.matches || []);
       } catch (err) {
         setError(err.message);
@@ -33,6 +32,20 @@ export default function App() {
 
     fetchGames();
   }, []);
+
+  // Função para filtrar canais brasileiros
+  const getCanaisBrasileiros = (tvList) => {
+    if (!tvList || tvList.length === 0) return [];
+
+    const canaisBR = tvList.filter((canal) =>
+      canal.toLowerCase().includes("br") ||
+      canal.toLowerCase().includes("globo") ||
+      canal.toLowerCase().includes("sportv") ||
+      canal.toLowerCase().includes("premiere")
+    );
+
+    return canaisBR.length > 0 ? canaisBR.slice(0, 2) : tvList.slice(0, 2);
+  };
 
   if (loading) return <div className="centered">Carregando jogos...</div>;
   if (error) return <div className="centered">Erro: {error}</div>;
@@ -63,6 +76,18 @@ export default function App() {
             <div className="status">
               Status: {game.status === "FINISHED" ? "Encerrado" : game.status}
             </div>
+
+            {/* Se a API Football-Data.org não tiver canais, substitua por sua fonte anterior */}
+            {game.tv && game.tv.length > 0 && (
+              <div className="tvSection">
+                <strong>Transmissão:</strong>
+                <ul className="tvList">
+                  {getCanaisBrasileiros(game.tv).map((channel, idx) => (
+                    <li key={idx}>{channel}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
       </div>
